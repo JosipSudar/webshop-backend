@@ -13,6 +13,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     CategoryID: {
       type: Sequelize.INTEGER,
+      foreignKey: true,
     },
     QuantityPerUnit: {
       type: Sequelize.STRING,
@@ -21,6 +22,9 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.DOUBLE,
     },
     UnitsInStock: {
+      type: Sequelize.INTEGER,
+    },
+    UnitsOnOrder: {
       type: Sequelize.INTEGER,
     },
   });
