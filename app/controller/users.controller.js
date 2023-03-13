@@ -113,12 +113,11 @@ exports.registerUser = async (req, res) => {
     req.body;
   try {
     //const hash = bcrypt.hash(password, 12, (err, hass) => hass);
-    const hash = bcrypt.hash(password, saltRounds, (err, hash) => {});
     await Users.create({
       user_name,
       email,
       username,
-      hash,
+      password,
       role_id,
       verified_email,
     });
