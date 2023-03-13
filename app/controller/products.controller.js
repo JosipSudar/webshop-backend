@@ -19,7 +19,7 @@ exports.getProductsByID = async (req, res) => {
   try {
     const products = await Products.findByPk(id);
     if (products) {
-      res.send(products);
+      res.send(products[0]);
     } else if (!products) {
       res.send("No products");
     }
