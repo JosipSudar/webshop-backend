@@ -27,3 +27,16 @@ exports.getProductsByID = async (req, res) => {
     console.log(e);
   }
 };
+exports.getProductsByCategorie = async (req, res) => {
+  const catId = req.params.id;
+  try {
+    const products = await Products.findAll({ where: { CategoryID: catId } });
+    if (products) {
+      res.send(products);
+    } else if (!products) {
+      res.send("No data");
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
