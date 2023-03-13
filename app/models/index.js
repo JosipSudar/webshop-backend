@@ -4,6 +4,7 @@ const Sequelize = require("sequelize");
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   dialect: "mysql",
+  dialectModule: require("mysql2"),
   dialectOptions: {
     connectTimeout: 100000,
   },
