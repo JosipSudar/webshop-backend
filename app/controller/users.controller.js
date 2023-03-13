@@ -106,3 +106,23 @@ exports.getUser = async (req, res) => {
     console.log(e);
   }
 };
+
+//register
+exports.registerUser = async (req, res) => {
+  const { user_name, email, username, password, role_id, verified_email } =
+    req.body;
+  try {
+    const users = await Users.create({
+      user_name,
+      email,
+      username,
+      password,
+      role_id,
+      verified_email,
+    });
+
+    res.status(200).send("Added!");
+  } catch (e) {
+    console.log(e);
+  }
+};
