@@ -6,6 +6,6 @@ module.exports = (app) => {
   router.get("/get/:id", products.getProductsByID);
 
   // get by: categorie id
-  router.get("/get-by-category/:id", products.getProductsByCategorie);
+  router.get("/get/category/:id", products.getProductsByCategorie);
   app.use("/api/products", router);
 };
