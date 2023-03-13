@@ -3,11 +3,11 @@
 //   password: 'Raptor_immense1',
 //   database: 'u302430061_raptor',
 module.exports = {
-  HOST: '127.0.0.1',
-  USER: 'root',
-  PASSWORD: 'josip',
-  DB: 'webshop',
-  dialect: 'mysql',
+  HOST: "185.166.188.206",
+  USER: "u302430061_Immense",
+  PASSWORD: "Password_immense1",
+  DB: "u302430061_shop",
+  dialect: "mysql",
   pool: {
     max: 5,
     min: 0,
