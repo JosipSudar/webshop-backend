@@ -111,8 +111,8 @@ exports.getUser = async (req, res) => {
 exports.registerUser = async (req, res) => {
   const { user_name, email, username, password, role_id, verified_email } =
     req.body;
+  const hash = bcrypt.hash(password, 12, (err, hash) => hash);
   try {
-    const hash = bcrypt.hash(password, 12, (err, hash) => hash);
     await Users.create({
       user_name,
       email,
