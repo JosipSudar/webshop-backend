@@ -16,7 +16,7 @@ exports.login = async (req, res) => {
     if (result.length > 0) {
       bcrypt.compare(password, result[0].password, (error, response) => {
         if (error) {
-          res.status(500).json({ message: "Something go wrong! /login" });
+          res.status(500).json({ message: "Something went wrong! /login" });
         }
         //return response and resul if is good
         if (response && result[0].verified_email) {
@@ -111,19 +111,40 @@ exports.getUser = async (req, res) => {
 exports.registerUser = async (req, res) => {
   const { user_name, email, username, password, role_id, verified_email } =
     req.body;
-  const hash = bcrypt.hash(password, 12, (err, hash) => hash);
-  try {
-    await Users.create({
-      user_name,
-      email,
-      username,
-      password: hash,
-      role_id,
-      verified_email,
-    });
 
-    res.status(200).send("Added!");
-  } catch (e) {
-    console.log(e);
-  }
+  // check if username exist
+  const user_exist = await Users.findAll({ where: { username: username } });
+  // return err
+  if (user_exist.length > 0) return res.status(500).send("user exist");
+
+  // bcypt password and check for errors
+  bcrypt.hash(password, 12, (err, hash) => {
+    if (!err) {
+      // if no errors send user to database
+      Users.create({
+        user_name,
+        email,
+        username,
+        password: hash,
+        role_id,
+        verified_email,
+      })
+        .then((response) => {
+          // if resšponse
+          if (response) {
+            res.status(200).send({ message: "User created!", user: response });
+          } else {
+            res.status(500).send("Something whent wrong!");
+          }
+        })
+        // catch err on saving to database
+        .catch((e) => {
+          res.status(500).send(e.message);
+        });
+
+      // catch err on hash
+    } else {
+      res.status(500).send(err.message);
+    }
+  });
 };

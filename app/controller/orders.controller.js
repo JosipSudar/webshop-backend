@@ -29,6 +29,7 @@ exports.postOrders = async (req, res) => {
     });
     res.status(200).send("Order is created!");
   } catch (e) {
+    res.status(500).send(e.message);
     console.log(e);
   }
 };
