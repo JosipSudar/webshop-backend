@@ -117,7 +117,7 @@ exports.registerUser = async (req, res) => {
       user_name,
       email,
       username,
-      hash,
+      password: hash,
       role_id,
       verified_email,
     });
@@ -127,4 +127,3 @@ exports.registerUser = async (req, res) => {
     console.log(e);
   }
 };
-//aaaaaaaaaaaaaaaaaaaaaaa
